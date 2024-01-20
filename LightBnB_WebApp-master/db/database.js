@@ -31,21 +31,6 @@ const getUserWithEmail = function (string) {
     });
 };
 
-// const getAllProperties = function (options, limit = 10) {
-
-//   return pool
-//     .query(
-//       'SELECT * FROM properties LIMIT $1;', [limit])
-//     .then((result) => {
-//       console.log(result.rows);
-//       return result.rows;
-//     })
-//     .catch((err) => {
-//       console.log(err.message);
-//     });
-// };
-
-
 
 /**
  * Get a single user from the database given their id.
@@ -53,7 +38,15 @@ const getUserWithEmail = function (string) {
  * @return {Promise<{}>} A promise to the user.
  */
 const getUserWithId = function (id) {
-  return Promise.resolve(users[id]);
+  return pool
+    .query(
+      'SELECT * FROM users WHERE id = $1;', [id])
+    .then((result) => {
+      return result.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
 };
 
 /**
@@ -62,10 +55,15 @@ const getUserWithId = function (id) {
  * @return {Promise<{}>} A promise to the user.
  */
 const addUser = function (user) {
-  const userId = Object.keys(users).length + 1;
-  user.id = userId;
-  users[userId] = user;
-  return Promise.resolve(user);
+  return pool
+    .query(
+      'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *;', [user.name, user.email, user.password])
+    .then((result) => {
+      return result.rows[0];
+    })
+    .catch((err => {
+      console.log(err.message);
+    }));
 };
 
 /// Reservations
