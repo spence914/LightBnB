@@ -5,7 +5,6 @@
 ```
 .
 ├── db
-│   ├── json
 │   └── database.js
 ├── public
 │   ├── javascript
@@ -41,8 +40,7 @@
 ```
 
 * `db` contains all the database interaction code.
-  * `json` is a directory that contains a bunch of dummy data in `.json` files.
-  * `database.js` is responsible for all queries to the database. It doesn't currently connect to any database, all it does is return data from `.json` files.
+  * `database.js` is responsible for all queries to the database. The functions inside have been updated to query the database and not the JSON files as before.
 * `public` contains all of the HTML, CSS, and client side JavaScript. 
   * `index.html` is the entry point to the application. It's the only html page because this is a single page application.
   * `javascript` contains all of the client side javascript files.
