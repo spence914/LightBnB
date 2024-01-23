@@ -1,13 +1,21 @@
 const { Pool } = require('pg');
 
+const path = require('path');
+const PATH = path.resolve(__dirname, '../.env');
+require("dotenv").config({path: PATH});
+
 const pool = new Pool({
-  user: 'spencerlewis',
-  password: '123',
-  host: 'localhost',
-  database: 'lightbnb'
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  host: process.env.HOST,
+  database: process.env.DATABASE
 });
 
 
+// Helper function to prevent empty search results when user doesn't capitalize city in search terms
+const capitalizeCity = function (string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
 
 /// Users
 
@@ -97,7 +105,7 @@ const getAllProperties = function (options, limit = 10) {
   let queryString = 'SELECT properties.*, avg(property_reviews.rating) as average_rating FROM properties JOIN property_reviews ON properties.id = property_reviews.property_id WHERE 1 = 1 ';
 
   if (options.city) {
-    queryParams.push(`%${options.city}`);
+    queryParams.push(`%${capitalizeCity(options.city)}`);
     queryString += `AND city LIKE $${queryParams.length}`;
   }
 
