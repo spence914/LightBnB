@@ -1,6 +1,37 @@
 # LightBnB
 LightBnb is a web app that manages user owned travel properties and reservations. The project is designed to teach and showcase database design
 and management, as well as the integration and use of databases in a web environent.
+
+## Setup
+1. Clone the repository from [here](https://github.com/spence914/LightBnB) 
+2. In a terminal window navigate to `LightBnB/LightBnB_WebApp-master`
+3. Install dependecies using `npm install`
+4. Create a `.env` file inside of `LightBnB/LightBnB_WebApp-master`
+5. Initialize a database on your computer in psql
+6. Input the credentials for the database you just created in your `.env` file:
+```
+USER=your_database_user
+PASSWORD=your_database_password
+HOST=localhost
+DATABASE=your_database_name
+```
+7. In `database.js` ensure that the line `const PATH = path.resolve(__dirname, '../.env');` points directly to the `.env` file you just created.
+8. Within psql run the migration schema sql files to create the tables in the database
+9. Then in psql run the seed sql files to populate the tables with sample data
+10. Ensure your working directory is `LightBnB/LightBnB_WebApp-master` and run `npm run local` to start the server
+11. In your web browser navigate to `http://localhost:3000/` to view the website 
+
+
+## Features
+1. Browsing
+- On the main page you can browse property listings and their attributes.
+
+2. Search
+- Users can narrow down the properties they view by searching within a particular city, price range, or minimum user rating.
+
+3. User Authentication
+- Users can create accounts, log in, then view all of their property listings and reservations
+
 ## Project Structure
 
 ```
