@@ -37,6 +37,12 @@
 ├── package.json
 ├── README.md
 └── server.js
+└── migrations
+│   ├──01_schema.sql
+│   ├──02_schema.sql
+└── seeds
+│   ├──01_seeds.sql
+│   ├──02_seeds.sql
 ```
 
 * `db` contains all the database interaction code.
@@ -51,3 +57,10 @@
 * `routes` contains the router files which are responsible for any HTTP requests to `/users/something` or `/api/something`. 
 * `styles` contains all of the sass files. 
 * `server.js` is the entry point to the application. This connects the routes to the database.
+* `migrations` defines the schema for the database used.
+  * `01_schema.js` defines schema for the database used in the app, all actual functionality on the app comes from the tables defined here.
+  * `02_schema.js` defines schema for the the two optional tables 'rates' and 'guest_reviews'. These tables are not actually used at any point but allow
+                   for further functionality to be added in the future.
+* `seeds` contains all seed data for our database
+  * `01_seeds.js` conatains data for first three sample users.
+  * `02_seeds.js` conatains data for all other users, properties, reservations, and property reviews.
