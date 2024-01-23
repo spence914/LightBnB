@@ -21,7 +21,8 @@ const getUserWithEmail = function (string) {
     .query(
       'SELECT * FROM users WHERE email = $1;', [string])
     .then((result) => {
-      return result.rows[0];
+      const user = result.rows[0];
+      return user;
     })
     .catch((err) => {
       console.log(err.message);
@@ -93,11 +94,11 @@ const getAllReservations = function (guest_id, limit = 10) {
 const getAllProperties = function (options, limit = 10) {
   let queryParams = [];
 
-  let queryString = 'SELECT properties.*, avg(property_reviews.rating) as average_rating FROM properties JOIN property_reviews ON properties.id = property_reviews.property_id ';
+  let queryString = 'SELECT properties.*, avg(property_reviews.rating) as average_rating FROM properties JOIN property_reviews ON properties.id = property_reviews.property_id WHERE 1 = 1 ';
 
   if (options.city) {
     queryParams.push(`%${options.city}`);
-    queryString += `WHERE city LIKE $${queryParams.length}`;
+    queryString += `AND city LIKE $${queryParams.length}`;
   }
 
   if (options.owner_id) {
