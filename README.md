@@ -1,5 +1,6 @@
 # LightBnB
-
+LightBnb is a web app that manages user owned travel properties and reservations. The project is designed to teach and showcase database design
+and management, as well as the integration and use of databases in a web environent.
 ## Project Structure
 
 ```
